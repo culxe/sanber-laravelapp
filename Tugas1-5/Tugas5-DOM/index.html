@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tugas 5 DOM</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand">Mini Ecommerce</a>
+        <form class="form-inline" id="formItem">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" id="keyword" aria-label="Search" />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchItem">Search</button>
+        </form>
+        <button class="btn btn-primary" id="cart"><i class="fas fa-shopping-cart"></i>(0)</button>
+      </nav>
+      <div class="row">
+        <div class="row col-md-12 mt-2" id="listBarang"></div>
+      </div>
+    </div>
+
+    <script>
+      var items = [
+        ["001", "1965 Gibson Southern Jumbo", 159.99, "Perfect for true musicians", "https://theguitarmarketplace.com/wp-content/uploads/2025/04/Untitled-design-2025-04-10T142530.434-600x600.jpg"],
+        ["002", "Gibson Custom Shop Wildwood Spec 1960", 799.0, "Les Paul Standard In Cherry Tea Burst", "https://theguitarmarketplace.com/wp-content/uploads/2025/04/Untitled-design-2025-04-24T155358.746-600x600.jpg"],
+        ["003", "Fender Sandard Telecaster", 2799.0, "In 3-Tone Sunbrust With Seymour Duncan Bridge Pickup", "https://theguitarmarketplace.com/wp-content/uploads/2025/04/Untitled-design-2025-04-24T155221.446-600x600.jpg"],
+        ["004", "Fender Custom Shop 1960", 799.0, "Stratocaster Relic In Lake Placid Blue", "https://theguitarmarketplace.com/wp-content/uploads/2025/04/Untitled-design-2025-04-24T155711.449-600x600.jpg"],
+        ["005", "PRS Limited Edition", 1800.0, "SE Custom 24 Exotic", "https://theguitarmarketplace.com/wp-content/uploads/2025/04/Untitled-design-2025-04-25T151714.550-600x600.jpg"],
+        ["006", "Epiphone EB-3 Bass", 799.0, "Bass in cherry so truly perfect", "https://theguitarmarketplace.com/wp-content/uploads/2025/04/Untitled-design-2025-04-24T160723.040-600x600.jpg"],
+      ];
+
+      var panjangItems = items.length;
+      var TampungProduct = document.getElementById("listBarang");
+
+      function tampilProduct(dataArray) {
+        var tampung = "";
+
+        for (var i = 0; i < dataArray.length; i++) {
+          tampung += `
+                <!-- Component Card dari Bootstrap --> 
+            <div class ="col-4 mt-2"> 
+            <div class="card" style="width: 18rem;">
+                <img src="${dataArray[i][4]}" class="card-img-top" height="200px" width="200px" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title" id="itemName">${dataArray[i][1]}</h5>
+                    <p class="card-text" id="itemDesc">${dataArray[i][3]}</p>
+                    <p class="card-text">$${dataArray[i][2]}</p>
+                    <a href="#" class="btn btn-primary" class="addCart" onclick="addcartFunction()">Add on Cart</a>
+                </div>
+            </div>
+            </div>  
+            `;
+        }
+
+        TampungProduct.innerHTML = tampung;
+        setAddToCartButtons();
+      }
+      tampilProduct(items);
+
+      // fungsi pencarian
+      var formSearch = document.getElementById("formItem");
+
+      function filterProduct(kataKunci) {
+        var newArray = [];
+        for (var j = 0; j < items.length; j++) {
+          var arrayProduct = items[j];
+          var namaProduct = arrayProduct[1];
+          var isMatch = namaProduct.toLowerCase().includes(kataKunci.toLowerCase());
+
+          if (isMatch === true) {
+            newArray.push(arrayProduct);
+          }
+        }
+        return newArray;
+      }
+
+      formSearch.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var inputSearch = document.getElementById("keyword").value;
+        var filter = filterProduct(inputSearch);
+        tampilProduct(filter);
+      });
+
+      // on click add to cart
+      var jumlahCart = 0;
+      function addcartFunction() {
+        jumlahCart++;
+        document.getElementById("cart").innerHTML = `<i class="fas fa-shopping-cart"></i>(${jumlahCart})`;
+      }
+
+      function setAddToCartButtons() {
+        var buttons = document.getElementsByClassName("addCart");
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].addEventListener("click", function (event) {
+            event.preventDefault();
+            addcartFunction();
+          });
+        }
+      }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+  </body>
+</html>

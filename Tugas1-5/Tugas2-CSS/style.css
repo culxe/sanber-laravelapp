@@ -1,0 +1,58 @@
+header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background-color: white;
+}
+.logo {
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+  padding-right: 50px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  background-image: url(assets/pattern.jpg);
+  padding: 30px 30px;
+}
+
+.content {
+  padding: 20px;
+  margin: auto;
+  margin-top: 50;
+  max-width: 1200px;
+  color: #333;
+  background-color: white;
+}
+h1 {
+  text-align: center;
+  color: black;
+}
+
+footer {
+  color: white;
+  padding: 10px;
+  text-align: center;
+  background-color: #000000;
+}
+article {
+  padding: 15px;
+  margin: 10px 0;
+}
