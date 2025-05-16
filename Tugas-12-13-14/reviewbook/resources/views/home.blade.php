@@ -5,20 +5,37 @@
 
 @section('content')
 
+@if (session('success'))
+  <div class="alert alert-success">
+      {{ session('success')}}
+  </div>
+@endif
 
-    <h1>Sanberbook</h1>
-    <h2>Social Media Developer Berkualitas</h2>
-    <p>Belajar dan Berbagi agar hidup ini semakin santai berkualitas</p>
-    <h3>Benefir Join di Sanberbook</h3>
+@if (session('danger'))
+  <div class="alert alert-danger">
+      {{ session('danger')}}
+  </div>
+@endif
+
+<div class="container text-center mb-5">
+<h1>Goodbook - Discover Your Next Favorite Book</h1>
+</div>
+@auth
+<h1> Welcome, {{Auth()->user()->name}}
+  @if (Auth()->user()->profile)
+      ({{Auth()->user()->profile->age}} Tahun)
+  @else
+      
+  @endif
+</h1> 
+@endauth
+    <h2></h2>
+    <p>Honest reviews by real readers — just like you.</p>
+    <h3>Quick Feature Highlights</h3>
     <ul>
-      <li>Mendapatkan motivasi dari sesama developer</li>
-      <li>Sharing knowledge dari para mastah Sanber</li>
-      <li>Dibuat oleh calon web developer terbaik</li>
+      <li>📚 Explore Books - Dive into a growing collection of titles across all genres.</li>
+      <li>🏷️ Browse by Genre -  Filter your way through our shelf.</li>
+      <li>✍️ Share Your Thoughts - Leave reviews and comment using your own account.</li>
     </ul>
-    <h3>Cara Bergabung ke SanberBook</h3>
-    <ol>
-      <li>Mengunjungi Website ini</li>
-      <li>Mendaftar di <a href="/register">Form Sign Up</a></li>
-      <li>Selesai!</li>
-    </ol>
+    <h3> <a href="/register">Here</a> to join Goodbook</h3>
  @endsection

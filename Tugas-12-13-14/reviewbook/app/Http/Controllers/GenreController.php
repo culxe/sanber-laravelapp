@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 // use Illuminate\Support\Facedes\DB;
 use DB;
 use Carbon\Carbon;
+use App\Models\Genre;
 class GenreController extends Controller
 {
     public function create(){
@@ -42,7 +43,8 @@ class GenreController extends Controller
     }
 
     public function show($id){
-        $genre = DB::table('genres')->find($id);
+        $genre = Genre::find($id);
+
         return view('genre.detail', ['genre'=> $genre]);
     }
 
